@@ -6,7 +6,11 @@ typedef struct Node {
     struct Node* next;
 } Node;
 
-
+/**
+ * Create node, can be used to initialise the node list.
+ * @param data The data of the node.
+ * @return The pointer of the node.
+ */
 Node *createNode(int data) {
     Node *temp = (Node*)malloc(sizeof(Node));
     temp->data = data;
@@ -14,10 +18,51 @@ Node *createNode(int data) {
     return temp;
 }
 
+/**
+ * Get the last node of the node list.
+ * @param head Head of node list.
+ * @return The pointer of the last node.
+ */
+Node *getLastNode(Node *head) {
+    while (head->next != NULL) {
+        head = head->next;
+    }
+    return head;
+}
+
+/**
+ * Append node in last of the node list.
+ * @param data
+ * @return The pointer of the node you added.
+ */
+Node *appendNode(Node *head,int data) {
+    Node *newNode = createNode(data);
+    Node * lastNode = getLastNode(head);
+    lastNode->next = newNode;
+    return newNode;
+}
+
+/**
+ * Print the node list.
+ * @param head The head of the node list.
+ */
 void printList(Node *head) {
     printf("%d\n",head->data);
     if (head->next != NULL) {
         printList(head->next);
     }
+}
+
+/**
+ * Free memory of the node list.
+ * @param head The head of the node list.
+ */
+void freeList(Node *head) {
+    // Recursive free next ( if head -> next is NULL, stopping recursive call )
+    if (head->next != NULL) {
+        freeList(head->next);
+    }
+    free(head);
+    printf("free:%p\n",head);
 }
 
