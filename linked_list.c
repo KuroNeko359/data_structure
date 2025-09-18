@@ -18,10 +18,14 @@ Node *createNode(int data) {
     return temp;
 }
 
+Node *initLinkedList() {
+    return createNode(0);
+}
+
 /**
  * Get the last node of the node list.
- * @param head Head of node list.
- * @return The pointer of the last node.
+ * @param head  Head of node list.
+ * @return      The pointer of the last node.
  */
 Node *getLastNode(Node *head) {
     while (head->next != NULL) {
@@ -31,9 +35,9 @@ Node *getLastNode(Node *head) {
 }
 
 /**
- * Append node in last of the node list.
- * @param data
- * @return The pointer of the node you added.
+ * Append a node in the last of the linked list.
+ * @param data  The data of the new node.
+ * @return      The pointer of the node that you had added.
  */
 Node *appendNode(Node *head,int data) {
     Node *newNode = createNode(data);
@@ -43,19 +47,19 @@ Node *appendNode(Node *head,int data) {
 }
 
 /**
- * Print the node list.
- * @param head The head of the node list.
+ * Print the linked list recursively.
+ * @param head The head node of the linked list.
  */
 void printList(Node *head) {
-    printf("%d\n",head->data);
     if (head->next != NULL) {
+        printf("%d -> ",head->next->data);
         printList(head->next);
     }
 }
 
 /**
- * Free memory of the node list.
- * @param head The head of the node list.
+ * Free memory used of the linked list.
+ * @param head The head node of the linked list.
  */
 void freeList(Node *head) {
     // Recursive free next ( if head -> next is NULL, stopping recursive call )
@@ -66,18 +70,20 @@ void freeList(Node *head) {
     printf("free:%p\n",head);
 }
 
+/**
+ * Insert a point into a singly linked list at the specified position.
+ * @param headNode  The head node of the linked list.
+ * @param index     The position index where the new node should be inserted.
+ *                  Must be a non-negative integer (0 or greater).
+ * @param newNode   Pointer to the new node that will be inserted into the list.
+ *                  Assumes newNode is properly allocated and initialized.
+ */
 void insertNode(Node *headNode, int index, Node *newNode) {
     if (index < 0) {
         printf("Index must be > 0.");
         return;
     }
-    // TODO Consider the case that index is 0,
-    // if (index == 0) {
-    //     newNode->next = headNode;
-    //     *headNode = *newNode;
-    //
-    // }
-    for (;index - 1 > 0; index--) {
+    for (;index > 0; index--) {
         headNode = headNode->next;
     }
     Node *temp = headNode->next;
@@ -85,7 +91,6 @@ void insertNode(Node *headNode, int index, Node *newNode) {
     newNode->next = temp;
 }
 
+
 //TODO The function of reverse node.
-void reverseNode() {}
-
-
+Node *reverseNode(Node *head);
