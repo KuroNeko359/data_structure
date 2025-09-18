@@ -66,3 +66,26 @@ void freeList(Node *head) {
     printf("free:%p\n",head);
 }
 
+void insertNode(Node *headNode, int index, Node *newNode) {
+    if (index < 0) {
+        printf("Index must be > 0.");
+        return;
+    }
+    // TODO Consider the case that index is 0,
+    // if (index == 0) {
+    //     newNode->next = headNode;
+    //     *headNode = *newNode;
+    //
+    // }
+    for (;index - 1 > 0; index--) {
+        headNode = headNode->next;
+    }
+    Node *temp = headNode->next;
+    headNode->next = newNode;
+    newNode->next = temp;
+}
+
+//TODO The function of reverse node.
+void reverseNode() {}
+
+
