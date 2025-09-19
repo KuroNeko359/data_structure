@@ -96,18 +96,23 @@ void insertNode(Node *headNode, int index, Node *newNode) {
 
 //TODO The function of reverse node.
 Node *reverseNode(Node *head) {
-    Node *lastNode = head;
+    if (head->next == NULL) {
+        printf("Linked list must has one node at least");
+        return head;
+    }
     Node *currentNode = head->next;
-    Node *newHeadNode = initLinkedList(0);
-    if (head->next->next == NULL) {
-        newHeadNode->next = currentNode;
-        return newHeadNode;
-    }
-    Node *nextNode = head->next->next;
-    while (nextNode -> next != NULL) {
-        // TODO unfinished
-    }
+    Node *prevNode = NULL;
 
+    while (currentNode->next != NULL) {
+        Node *temp = currentNode->next;
+        currentNode->next = prevNode;
+        prevNode = currentNode;
+        currentNode = temp;
+    }
+    currentNode->next=prevNode;
+
+    Node * newHeadNode = createNode(0);
+    newHeadNode->next = currentNode;
     return newHeadNode;
 }
 
@@ -136,8 +141,8 @@ void deleteNode(Node *head,int index) {
         head = head->next;
     }
     Node *temp = head->next;
-    if (head->next->next != NULL) {
-        head->next = head->next->next;
+    if (temp->next != NULL) {
+        head->next = temp->next;
     }else head->next = NULL;
 
     free(temp);
