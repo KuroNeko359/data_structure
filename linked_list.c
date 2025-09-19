@@ -18,7 +18,12 @@ Node *createNode(int data) {
     return temp;
 }
 
-Node *initLinkedList(int data) {
+/**
+ * Initialising a linked list.
+ * @param data
+ * @return
+ */
+Node *initLinkedList() {
     return createNode(0);
 }
 
