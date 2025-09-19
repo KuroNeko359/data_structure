@@ -118,8 +118,14 @@ Node *reverseNode(Node *head) {
 
 Node *reverseNodeRecursive(Node *head);
 
-int getListLength(Node *head) {
-    int len = 0 ;
+
+/**
+ * This function is used for get the linked list length.
+ * @param head The head of the linked list.
+ * @return length
+ */
+unsigned int getListLength(Node *head) {
+    unsigned int len = 0 ;
     while (head->next != NULL) {
         head = head->next;
         len++;
