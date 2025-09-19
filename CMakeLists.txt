@@ -4,4 +4,5 @@ project(csapp C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(csapp main.c
-        linked_list.c)
+        linked_list.c
+        linked_list.h)

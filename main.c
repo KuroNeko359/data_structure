@@ -1,7 +1,7 @@
 #include "linked_list.c"
 
 int main() {
-    Node *head = initLinkedList(1);
+    Node *head = initLinkedList();
 
     Node *node2 = createNode(2);
     head->next = node2;
@@ -17,6 +17,7 @@ int main() {
     printf("%d\n",getListLength(head));
     Node *newHeadNode = reverseNode(head);
     printList(newHeadNode);
+
 
     return 0;
 }
