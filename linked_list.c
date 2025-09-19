@@ -18,7 +18,7 @@ Node *createNode(int data) {
     return temp;
 }
 
-Node *initLinkedList() {
+Node *initLinkedList(int data) {
     return createNode(0);
 }
 
@@ -54,6 +54,8 @@ void printList(Node *head) {
     if (head->next != NULL) {
         printf("%d -> ",head->next->data);
         printList(head->next);
+    }else {
+        printf("NULL\n");
     }
 }
 
@@ -93,4 +95,52 @@ void insertNode(Node *headNode, int index, Node *newNode) {
 
 
 //TODO The function of reverse node.
-Node *reverseNode(Node *head);
+Node *reverseNode(Node *head) {
+    Node *lastNode = head;
+    Node *currentNode = head->next;
+    Node *newHeadNode = initLinkedList(0);
+    if (head->next->next == NULL) {
+        newHeadNode->next = currentNode;
+        return newHeadNode;
+    }
+    Node *nextNode = head->next->next;
+    while (nextNode -> next != NULL) {
+        // TODO unfinished
+    }
+
+    return newHeadNode;
+}
+
+Node *reverseNodeRecursive(Node *head);
+
+int getListLength(Node *head) {
+    int len = 0 ;
+    while (head->next != NULL) {
+        head = head->next;
+        len++;
+    }
+    return len;
+}
+
+/**
+ * The function can be used to delete a node at any position.
+ * @param head      The head node of the linked list.
+ * @param index     The position index of the node you want to delete.
+ */
+void deleteNode(Node *head,int index) {
+    if (index >= getListLength(head)) {
+        printf("Index is out of the linked list.\n");
+        return;
+    }
+    for (;index > 0; index--) {
+        head = head->next;
+    }
+    Node *temp = head->next;
+    if (head->next->next != NULL) {
+        head->next = head->next->next;
+    }else head->next = NULL;
+
+    free(temp);
+    temp=NULL;// Avoid wild pointer.
+}
+

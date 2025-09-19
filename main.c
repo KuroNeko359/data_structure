@@ -1,16 +1,18 @@
 #include "linked_list.c"
 
 int main() {
-    Node *head = initLinkedList();
-
+    HeadNode *head = initLinkedList(1);
+    Node *node1 = head->next;
+    printf("%d\n",node1->data);
     Node *node2 = createNode(2);
-    head->next = node2;
+    node1->next = node2;
 
     Node *node3 = createNode(3);
     node2->next = node3;
 
-    insertNode(head,0,createNode(1));
-    printList(head);
+
+    print(head);
+    printf("%d\n",getListLength(head));
 
 
     return 0;
