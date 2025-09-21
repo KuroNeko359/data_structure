@@ -15,8 +15,8 @@ int main() {
     insertNode(head,0,createNode(1));
     printList(head);
     printf("%d\n",getListLength(head));
-    Node *newHeadNode = reverseNode(head);
-    printList(newHeadNode);
+    reverseNode(&head);
+    printList(head);
 
 
     return 0;

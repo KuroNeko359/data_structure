@@ -67,9 +67,9 @@ void reverseNode(Node **head) {
     Node *headNode = *head;
     if ( headNode->next == NULL) {
         printf("Linked list must has one node at least");
-        return head;
+        return;
     }
-    Node *currentNode = head->next;
+    Node *currentNode = headNode -> next;
     Node *prevNode = NULL;
 
     while (currentNode->next != NULL) {
@@ -80,14 +80,24 @@ void reverseNode(Node **head) {
     }
     currentNode->next = prevNode;
 
-    Node *newHeadNode = createNode(0);
-    newHeadNode->next = currentNode;
-    return newHeadNode;
+    (*head)->next = currentNode;
 }
 
-Node *reverseNodeRecursive(Node *head) {
-    reverseNodeRecursive(head->next);
-    head->next = head;
+
+Node *doReverseNodeRecursively(Node *currentNode) {
+    if (currentNode->next == NULL) {
+        return currentNode;
+    }
+    Node *next = doReverseNodeRecursively(currentNode->next);
+
+    next->next = currentNode;
+    currentNode->next = NULL;
+    return currentNode;
+}
+
+//TODO unfinished
+void *reverseNodeRecursively(Node **head) {
+
 }
 
 
