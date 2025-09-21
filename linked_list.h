@@ -64,9 +64,9 @@ void insertNode(Node *headNode, int index, Node *newNode);
  * The function is used for reversing a linked list.
  * @param head The reference of the pointer of the head node.
  */
-void reverseNode(Node **head);
+void reverseNode(Node *head);
 
-void *reverseNodeRecursively(Node **head);
+void reverseNodeRecursively(Node *head);
 
 /**
  * This function is used for get the linked list length.

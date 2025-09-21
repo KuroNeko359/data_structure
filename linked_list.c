@@ -32,7 +32,7 @@ Node *appendNode(Node *head, int data) {
 
 void printList(Node *head) {
     if (head->next != NULL) {
-        printf("%d -> ", head->next->data);
+        printf("|%p|%d| -> ", head->next, head->next->data);
         printList(head->next);
     } else {
         printf("NULL\n");
@@ -63,13 +63,12 @@ void insertNode(Node *headNode, int index, Node *newNode) {
     newNode->next = temp;
 }
 
-void reverseNode(Node **head) {
-    Node *headNode = *head;
-    if ( headNode->next == NULL) {
+void reverseNode(Node *headNode) {
+    if (headNode->next == NULL) {
         printf("Linked list must has one node at least");
         return;
     }
-    Node *currentNode = headNode -> next;
+    Node *currentNode = headNode->next;
     Node *prevNode = NULL;
 
     while (currentNode->next != NULL) {
@@ -80,25 +79,32 @@ void reverseNode(Node **head) {
     }
     currentNode->next = prevNode;
 
-    (*head)->next = currentNode;
+    headNode->next = currentNode;
 }
 
 
-Node *doReverseNodeRecursively(Node *currentNode) {
-    if (currentNode->next == NULL) {
-        return currentNode;
+Node *doReverse(Node *node) {
+    if (node == NULL||node->next == NULL) {
+        return node;
     }
-    Node *next = doReverseNodeRecursively(currentNode->next);
-
-    next->next = currentNode;
-    currentNode->next = NULL;
-    return currentNode;
+    Node *new_head = doReverse(node->next);
+    (node->next)->next = node;
+    node->next = NULL;
+    return new_head;
 }
 
-//TODO unfinished
-void *reverseNodeRecursively(Node **head) {
-    Node *headNode = *head;
-    headNode->next = doReverseNodeRecursively(headNode);
+ Node* doReverseRecursively(Node* currentNode) {
+    if (currentNode == NULL || currentNode->next == NULL) {
+        return currentNode; // Return lastNode
+    }
+    Node* lastNode = doReverse(currentNode->next);
+    currentNode->next->next = currentNode;
+    currentNode->next = NULL;
+    return lastNode;
+}
+
+void reverseNodeRecursively(Node *head) {
+    head->next = doReverseRecursively(head->next);
 }
 
 
