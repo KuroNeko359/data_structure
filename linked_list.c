@@ -63,11 +63,9 @@ void insertNode(Node *headNode, int index, Node *newNode) {
     newNode->next = temp;
 }
 
-
-//TODO The function of reverse node, unfinished.
-//TODO Replace it with return void value.
-Node *reverseNode(Node *head) {
-    if (head->next == NULL) {
+void reverseNode(Node **head) {
+    Node *headNode = *head;
+    if ( headNode->next == NULL) {
         printf("Linked list must has one node at least");
         return head;
     }
