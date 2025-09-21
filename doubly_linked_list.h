@@ -5,18 +5,20 @@
 #ifndef CSAPP_DOUBLY_LINKED_LIST_H
 #define CSAPP_DOUBLY_LINKED_LIST_H
 
-typedef struct Node {
+typedef struct doubly_list_node {
     int data;
-    Node *prev;
-    Node *next;
-} Node;
+    struct doubly_list_node *prev;
+    struct doubly_list_node *next;
+} doubly_list_node;
 
-void printList(Node *headNode);
+void doubly_list_print(doubly_list_node *head_node);
 
-void appendNode(Node *headNode,int data);
+void doubly_list_append(doubly_list_node *head_node,int data);
 
-Node *createNode(int data);
+doubly_list_node *doubly_list_create(int data);
 
+doubly_list_node *doubly_list_init(int data);
 
+doubly_list_node *doubly_list_get_tail(doubly_list_node *head);
 
 #endif //CSAPP_DOUBLY_LINKED_LIST_H

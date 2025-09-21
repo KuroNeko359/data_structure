@@ -5,50 +5,50 @@
 #ifndef CSAPP_LINKED_LIST_H
 #define CSAPP_LINKED_LIST_H
 
-typedef struct Node {
+typedef struct single_list_node {
     int data;
-    struct Node *next;
-} Node;
+    struct single_list_node *next;
+} single_list_node;
 
 /**
  * Create node, can be used to initialise the node list.
  * @param data The data of the node.
  * @return The pointer of the node.
  */
-Node *createNode(int data);
+single_list_node *single_list_create(int data);
 
 /**
  * Initialising a linked list.
  * @param data
  * @return
  */
-Node *initLinkedList();
+single_list_node *single_list_init();
 
 /**
  * Get the last node of the node list.
  * @param head  Head of node list.
  * @return      The pointer of the last node.
  */
-Node *getLastNode(Node *head);
+single_list_node *single_list_get_tail(single_list_node *head);
 
 /**
  * Append a node in the last of the linked list.
  * @param data  The data of the new node.
  * @return      The pointer of the node that you had added.
  */
-Node *appendNode(Node *head, int data);
+single_list_node *single_list_append(single_list_node *head, int data);
 
 /**
  * Print the linked list recursively.
  * @param head The head node of the linked list.
  */
-void printList(Node *head);
+void single_list_print(single_list_node *head);
 
 /**
  * Free memory used of the linked list.
  * @param head The head node of the linked list.
  */
-void freeList(Node *head);
+void single_list_free(single_list_node *head);
 
 /**
  * Insert a point into a singly linked list at the specified position.
@@ -58,28 +58,28 @@ void freeList(Node *head);
  * @param newNode   Pointer to the new node that will be inserted into the list.
  *                  Assumes newNode is properly allocated and initialized.
  */
-void insertNode(Node *headNode, int index, Node *newNode);
+void single_list_insert(single_list_node *head_node, int index, single_list_node *new_node);
 
 /**
  * The function is used for reversing a linked list.
  * @param head The reference of the pointer of the head node.
  */
-void reverseNode(Node *head);
+void single_list_reverse(single_list_node *head);
 
-void reverseNodeRecursively(Node *head);
+void single_list_reverse_rec(single_list_node *head);
 
 /**
  * This function is used for get the linked list length.
  * @param head The head of the linked list.
  * @return length
  */
-unsigned int getListLength(Node *head);
+unsigned int single_list_get_length(single_list_node *head);
 
 /**
  * The function can be used to delete a node at any position.
  * @param head      The head node of the linked list.
  * @param index     The position index of the node you want to delete.
  */
-void deleteNode(Node *head, int index);
+void single_list_delete(single_list_node *head, int index);
 
 #endif //CSAPP_LINKED_LIST_H
