@@ -97,7 +97,8 @@ Node *doReverseNodeRecursively(Node *currentNode) {
 
 //TODO unfinished
 void *reverseNodeRecursively(Node **head) {
-
+    Node *headNode = *head;
+    headNode->next = doReverseNodeRecursively(headNode);
 }
 
 
