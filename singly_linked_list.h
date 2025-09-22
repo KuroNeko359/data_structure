@@ -48,7 +48,7 @@ void single_list_print(single_list_node *head);
  * Free memory used of the linked list.
  * @param head The head node of the linked list.
  */
-void single_list_free(single_list_node *head);
+inline void single_list_free(single_list_node *head);
 
 /**
  * Insert a point into a singly linked list at the specified position.
@@ -58,28 +58,28 @@ void single_list_free(single_list_node *head);
  * @param newNode   Pointer to the new node that will be inserted into the list.
  *                  Assumes newNode is properly allocated and initialized.
  */
-void single_list_insert(single_list_node *head_node, int index, single_list_node *new_node);
+inline void single_list_insert(single_list_node *head_node, int index, single_list_node *new_node);
 
 /**
  * The function is used for reversing a linked list.
  * @param head The reference of the pointer of the head node.
  */
-void single_list_reverse(single_list_node *head);
+inline void single_list_reverse(single_list_node *head);
 
-void single_list_reverse_rec(single_list_node *head);
+inline void single_list_reverse_rec(single_list_node *head);
 
 /**
  * This function is used for get the linked list length.
  * @param head The head of the linked list.
  * @return length
  */
-unsigned int single_list_get_length(single_list_node *head);
+inline unsigned int single_list_get_length(single_list_node *head);
 
 /**
  * The function can be used to delete a node at any position.
  * @param head      The head node of the linked list.
  * @param index     The position index of the node you want to delete.
  */
-void single_list_delete(single_list_node *head, int index);
+inline void single_list_delete(single_list_node *head, int index);
 
 #endif //CSAPP_LINKED_LIST_H

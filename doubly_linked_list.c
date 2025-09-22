@@ -22,19 +22,19 @@ doubly_list_node *doubly_list_get_tail(doubly_list_node *head) {
 }
 
 //
-void doubly_list_append(doubly_list_node *headNode,int data) {
-    doubly_list_node *lastNode = doubly_list_get_tail(headNode);
-    doubly_list_node * newNode = doubly_list_create(data);
-    lastNode->next = newNode;
-    newNode->prev = lastNode;
+void doubly_list_append(doubly_list_node *head_node,int data) {
+    doubly_list_node *last_node = doubly_list_get_tail(head_node);
+    doubly_list_node * new_node = doubly_list_create(data);
+    last_node->next = new_node;
+    new_node->prev = last_node;
 }
 
 doubly_list_node *doubly_list_create(int data) {
-    doubly_list_node *newNode;
-    newNode->data = data;
-    newNode->next = NULL;
-    newNode->prev = NULL;
-    return newNode;
+    doubly_list_node *new_node;
+    new_node->data = data;
+    new_node->next = NULL;
+    new_node->prev = NULL;
+    return new_node;
 }
 
 doubly_list_node *initLinkedList(int data) {

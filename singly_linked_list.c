@@ -3,7 +3,7 @@
 #include "singly_linked_list.h"
 
 
-single_list_node *single_list_create(int data) {
+inline single_list_node *single_list_create(int data) {
     single_list_node *temp = (single_list_node *) malloc(sizeof(single_list_node));
     temp->data = data;
     temp->next = NULL;
@@ -11,18 +11,18 @@ single_list_node *single_list_create(int data) {
 }
 
 
-single_list_node *single_list_init() {
+inline single_list_node *single_list_init() {
     return single_list_create(0);
 }
 
-single_list_node *single_list_get_tail(single_list_node *head) {
+inline single_list_node *single_list_get_tail(single_list_node *head) {
     while (head->next != NULL) {
         head = head->next;
     }
     return head;
 }
 
-single_list_node *single_list_append(single_list_node *head, int data) {
+inline single_list_node *single_list_append(single_list_node *head, int data) {
     single_list_node *new_node = single_list_create(data);
     single_list_node *last_node = single_list_get_tail(head);
     last_node->next = new_node;
@@ -40,7 +40,7 @@ void single_list_print(single_list_node *head) {
 }
 
 
-void single_list_free(single_list_node *head) {
+inline void single_list_free(single_list_node *head) {
     // Recursive free next ( if head -> next is NULL, stopping recursive call )
     if (head->next != NULL) {
         single_list_free(head->next);
@@ -50,7 +50,7 @@ void single_list_free(single_list_node *head) {
 }
 
 
-void single_list_insert(single_list_node *head_node, int index, single_list_node *new_node) {
+inline void single_list_insert(single_list_node *head_node, int index, single_list_node *new_node) {
     if (index < 0) {
         printf("Index must be > 0.");
         return;
@@ -63,27 +63,27 @@ void single_list_insert(single_list_node *head_node, int index, single_list_node
     new_node->next = temp;
 }
 
-void single_list_reverse(single_list_node *head_node) {
+inline void single_list_reverse(single_list_node *head_node) {
     if (head_node->next == NULL) {
         printf("Linked list must has one node at least");
         return;
     }
-    single_list_node *currentNode = head_node->next;
-    single_list_node *prevNode = NULL;
+    single_list_node *current_node = head_node->next;
+    single_list_node *prev_node = NULL;
 
-    while (currentNode->next != NULL) {
-        single_list_node *temp = currentNode->next;
-        currentNode->next = prevNode;
-        prevNode = currentNode;
-        currentNode = temp;
+    while (current_node->next != NULL) {
+        single_list_node *temp = current_node->next;
+        current_node->next = prev_node;
+        prev_node = current_node;
+        current_node = temp;
     }
-    currentNode->next = prevNode;
+    current_node->next = prev_node;
 
-    head_node->next = currentNode;
+    head_node->next =current_node;
 }
 
 
-single_list_node *do_reverse_rec(single_list_node *node) {
+static single_list_node *do_reverse_rec(single_list_node *node) {
     if (node == NULL||node->next == NULL) {
         return node;
     }
@@ -108,7 +108,7 @@ unsigned int single_list_get_length(single_list_node *head) {
 }
 
 
-void single_list_delete(single_list_node *head, int index) {
+inline void single_list_delete(single_list_node *head, int index) {
     if (index >= single_list_get_length(head)) {
         printf("Index is out of the linked list.\n");
         return;
