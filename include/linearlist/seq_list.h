@@ -39,4 +39,6 @@ void seq_insert_elem(seq_list *seq, int index,seq_list_type elem);
  */
 seq_list_type seq_get_elem(seq_list *seq, int index);
 
+void seq_list_destroy(seq_list *seq);
+
 #endif //CSAPP_SEQ_LIST_H
