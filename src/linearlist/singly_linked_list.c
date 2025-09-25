@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "linearlist/singly_linked_list.h"
 
-inline single_list_node *single_list_create(int data) {
+inline single_list_node *single_list_create(SINGLE_LIST_ELEM_TYPE data) {
     single_list_node *temp = (single_list_node *) malloc(sizeof(single_list_node));
     temp->data = data;
     temp->next = NULL;
@@ -21,7 +21,7 @@ inline single_list_node *single_list_get_tail(single_list_node *head) {
     return head;
 }
 
-inline single_list_node *single_list_append(single_list_node *head, int data) {
+inline single_list_node *single_list_append(single_list_node *head, SINGLE_LIST_ELEM_TYPE data) {
     single_list_node *new_node = single_list_create(data);
     single_list_node *last_node = single_list_get_tail(head);
     last_node->next = new_node;

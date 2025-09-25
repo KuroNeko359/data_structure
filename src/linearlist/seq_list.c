@@ -69,7 +69,6 @@ void seq_add_elem(seq_list *seq,seq_list_type elem) {
 }
 
 void seq_append_elems(seq_list *seq,seq_list_type *arr, unsigned int arr_size) {
-    printf("%d\n", *(seq->elem + 4));
     while (seq->len + arr_size > seq->size) {
         seq_realloc(seq);
     }
@@ -103,6 +102,7 @@ void seq_insert_elem(seq_list *seq, int index,seq_list_type elem) {
     if (index > seq->len) {
         printf("Failed to insert elem, because the index %d is out of range. "
                "The maximum valid index is %d.\n", index, seq->len);
+        return;
     }
     arrcpy(
         seq->elem + index + 1,

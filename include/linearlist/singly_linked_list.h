@@ -4,9 +4,10 @@
 
 #ifndef CSAPP_LINKED_LIST_H
 #define CSAPP_LINKED_LIST_H
+#define SINGLE_LIST_ELEM_TYPE int
 
 typedef struct single_list_node {
-    int data;
+    SINGLE_LIST_ELEM_TYPE data;
     struct single_list_node *next;
 } single_list_node;
 
@@ -15,7 +16,7 @@ typedef struct single_list_node {
  * @param data The data of the node.
  * @return The pointer of the node.
  */
-single_list_node *single_list_create(int data);
+single_list_node *single_list_create(SINGLE_LIST_ELEM_TYPE data);
 
 /**
  * Initialising a linked list.
@@ -36,7 +37,7 @@ single_list_node *single_list_get_tail(single_list_node *head);
  * @param data  The data of the new node.
  * @return      The pointer of the node that you had added.
  */
-single_list_node *single_list_append(single_list_node *head, int data);
+single_list_node *single_list_append(single_list_node *head, SINGLE_LIST_ELEM_TYPE data);
 
 /**
  * Print the linked list recursively.
