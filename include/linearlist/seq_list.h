@@ -21,19 +21,22 @@ seq_list *seq_list_init(seq_list_type *arr, unsigned int arr_size);
 
 void seq_print(seq_list *seq);
 
-void seq_append_elems(seq_list *seq,seq_list_type *arr,unsigned int arr_size);
+void seq_append_elems(seq_list *seq,seq_list_type *arr, unsigned int arr_size);
 
 void seq_add_elem(seq_list *seq,seq_list_type elem);
 
 void seq_realloc(seq_list *seq);
 
-void seq_delete_elem(seq_list *seq,int index);
+void seq_delete_elem(seq_list *seq, int index);
 
+void seq_insert_elem(seq_list *seq, int index,seq_list_type elem);
 
-
-void test();
-
-
-
+/**
+ * A safer method to get elem from seq_list.
+ * @param seq The pointer of the seq list.
+ * @param index The position of the elem that you will get.
+ * @return The value of the elem.
+ */
+seq_list_type seq_get_elem(seq_list *seq, int index);
 
 #endif //CSAPP_SEQ_LIST_H

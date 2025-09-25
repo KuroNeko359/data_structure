@@ -42,7 +42,7 @@ void seq_add_elem(seq_list *seq,seq_list_type elem) {
     seq->elem[seq->len] = elem;
     seq->len++;
 
-    if (ENABLE_DEBUG == 1) {
+    if (ENABLE_DEBUG) {
         DEBUG_PRINT("%d elems added, current len: %d size: %d.", elem, seq->len, seq->size);
     }
 }
@@ -63,5 +63,35 @@ void seq_delete_elem(seq_list *seq, int index) {
         seq->elem + index + 1,
         (seq->len - (unsigned int)(index + 1)) * sizeof(seq_list_type)
     );
+    if (ENABLE_DEBUG) {
+        printf("memcpy: from %p to %p, len:%d \n",seq->elem + index + 1,seq->elem + index ,(seq->len - (unsigned int)(index + 1)) );
+    }
+
     seq->len--;
+}
+
+
+void seq_insert_elem(seq_list *seq, int index,seq_list_type elem) {
+    if (seq->len + 1 >= seq->size) {
+        seq_realloc(seq);
+    }
+    memcpy(
+        seq->elem + index + 1,
+        seq->elem + index,
+        (seq->len - (unsigned int)index) * sizeof(seq_list_type)
+    );
+    if (ENABLE_DEBUG) {
+        printf("memcpy: from %p to %p, len:%d \n",seq->elem + index,seq->elem + index + 1,(seq->len - (unsigned int)index) );
+    }
+    *(seq->elem + index) = elem;
+
+    seq->len++;
+}
+
+seq_list_type seq_get_elem(seq_list *seq, int index) {
+    if (index < seq->size) {
+        return *(seq->elem + index);
+    }
+    printf("Index %d is out of bounds.",index);
+    exit(1);
 }
