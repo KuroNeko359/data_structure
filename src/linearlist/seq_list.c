@@ -117,3 +117,10 @@ seq_list_type seq_get_elem(seq_list *seq, int index) {
     printf("Index %d is out of bounds.", index);
     exit(1);
 }
+
+void seq_list_destroy(seq_list *seq) {
+    free(seq->elem);
+    free(seq);
+    seq->elem = NULL;
+    seq = NULL;
+}
