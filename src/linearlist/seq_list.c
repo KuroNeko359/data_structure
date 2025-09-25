@@ -100,6 +100,10 @@ void seq_insert_elem(seq_list *seq, int index,seq_list_type elem) {
     if (seq->len + 1 >= seq->size) {
         seq_realloc(seq);
     }
+    if (index > seq->len) {
+        printf("Failed to insert elem, because the index %d is out of range. "
+               "The maximum valid index is %d.\n", index, seq->len);
+    }
     arrcpy(
         seq->elem + index + 1,
         seq->elem + index,
