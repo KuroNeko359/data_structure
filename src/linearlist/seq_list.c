@@ -42,10 +42,16 @@ seq_list *seq_list_init(seq_list_type *arr, unsigned int arr_size) {
 
 void seq_realloc(seq_list *seq) {
     void *new_pointer = realloc(seq->elem, 2 * seq->size * TYPE_SIZE);
-    seq->elem = new_pointer;
-    seq->size = seq->size * 2;
-    if (ENABLE_DEBUG) {
-        DEBUG_PRINT("Seq has reallocated, now seq->size is %d.", seq->size);
+    if (new_pointer != NULL) {
+        seq->elem = new_pointer;
+        seq->size = seq->size * 2;
+        if (ENABLE_DEBUG) {
+            DEBUG_PRINT("Seq has reallocated, now seq->size is %d.", seq->size);
+        }
+    }else {
+        if (ENABLE_DEBUG) {
+            DEBUG_PRINT("Seq reallocate failed.");
+        }
     }
 }
 
