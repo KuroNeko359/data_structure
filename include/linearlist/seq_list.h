@@ -27,6 +27,10 @@ void seq_add_elem(seq_list *seq,seq_list_type elem);
 
 void seq_realloc(seq_list *seq);
 
+void seq_delete_elem(seq_list *seq,int index);
+
+
+
 void test();
 
 

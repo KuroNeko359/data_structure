@@ -28,10 +28,10 @@ seq_list *seq_list_init(seq_list_type *arr, unsigned int arr_size) {
 }
 
 void seq_realloc(seq_list *seq) {
-    void * new_pointer = realloc(seq->elem,seq->size * 2);
+    void *new_pointer = realloc(seq->elem, seq->size * 2);
     seq->elem = new_pointer;
     seq->size = seq->size * 2;
-    DEBUG_PRINT("Seq has reallocated, now seq->size is %d.",seq->size);
+    DEBUG_PRINT("Seq has reallocated, now seq->size is %d.", seq->size);
 }
 
 void seq_add_elem(seq_list *seq,seq_list_type elem) {
@@ -43,16 +43,25 @@ void seq_add_elem(seq_list *seq,seq_list_type elem) {
     seq->len++;
 
     if (ENABLE_DEBUG == 1) {
-        DEBUG_PRINT("%d elems added, current len: %d size: %d.",elem,seq->len,seq->size);
+        DEBUG_PRINT("%d elems added, current len: %d size: %d.", elem, seq->len, seq->size);
     }
 }
 
-void seq_append_elems(seq_list *seq,seq_list_type *arr,unsigned int arr_size) {
+void seq_append_elems(seq_list *seq,seq_list_type *arr, unsigned int arr_size) {
     if (seq->len + arr_size > seq->size) {
         // TODO Fix the case that seq->len + arr_size > 2 * seq->size
         seq_realloc(seq);
     }
     seq_list_type *seq_end = (seq->elem + seq->len);
-    memcpy(seq_end,arr,arr_size * sizeof(seq_list_type));
+    memcpy(seq_end, arr, arr_size * sizeof(seq_list_type));
     seq->len += arr_size;
+}
+
+void seq_delete_elem(seq_list *seq, int index) {
+    memcpy(
+        seq->elem + index,
+        seq->elem + index + 1,
+        (seq->len - (unsigned int)(index + 1)) * sizeof(seq_list_type)
+    );
+    seq->len--;
 }
