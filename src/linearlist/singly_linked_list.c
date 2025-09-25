@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "singly_linked_list.h"
-
+#include "linearlist/singly_linked_list.h"
 
 inline single_list_node *single_list_create(int data) {
     single_list_node *temp = (single_list_node *) malloc(sizeof(single_list_node));
