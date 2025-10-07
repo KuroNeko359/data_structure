@@ -15,6 +15,7 @@ set(
         include/log.h
         include/linearlist/array.h
         include/linearlist/seq_list.h
+        include/types.h
 
 )
 

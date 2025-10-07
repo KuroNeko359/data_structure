@@ -45,7 +45,12 @@ doubly_list_node *doubly_list_init(DOUBLY_LIST_ELEM_TYPE data) {
     return head;
 }
 
-
+bool doubly_linked_list_is_empty(doubly_linked_list *head) {
+    if (head->next == NULL) {
+        return true;
+    }
+    return false;
+}
 
 
 
