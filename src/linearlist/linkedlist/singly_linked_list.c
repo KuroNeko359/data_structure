@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "../../../include/linearlist/linkedlist/singly_linked_list.h"
 
-inline singly_list_node *single_list_create(SINGLY_LIST_ELEM_TYPE data) {
+singly_list_node *singly_list_create(SINGLY_LIST_ELEM_TYPE data) {
     singly_list_node *temp = (singly_list_node *) malloc(sizeof(singly_list_node));
     temp->data = data;
     temp->next = NULL;
@@ -10,47 +10,47 @@ inline singly_list_node *single_list_create(SINGLY_LIST_ELEM_TYPE data) {
 }
 
 
-inline singly_list_node *single_list_init() {
-    return single_list_create(0);
+singly_linked_list *singly_list_init() {
+    return singly_list_create(0);
 }
 
-inline singly_list_node *single_list_get_tail(singly_linked_list *head) {
+inline singly_list_node *singly_list_get_tail(singly_linked_list *head) {
     while (head->next != NULL) {
         head = head->next;
     }
     return head;
 }
 
-inline singly_list_node *single_list_append(singly_linked_list *head, SINGLY_LIST_ELEM_TYPE data) {
-    singly_list_node *new_node = single_list_create(data);
-    singly_list_node *last_node = single_list_get_tail(head);
+inline singly_list_node *singly_list_append(singly_linked_list *head, SINGLY_LIST_ELEM_TYPE data) {
+    singly_list_node *new_node = singly_list_create(data);
+    singly_list_node *last_node = singly_list_get_tail(head);
     last_node->next = new_node;
     return new_node;
 }
 
 
-void single_list_print(singly_linked_list *head) {
+void singly_list_print(singly_linked_list *head) {
     if (head->next != NULL) {
         singly_list_node *current = head->next;
         printf("|%p|%d| -> ", head->next, current->data);
-        single_list_print(head->next);
+        singly_list_print(head->next);
     } else {
         printf("NULL\n");
     }
 }
 
 
-inline void single_list_free(singly_linked_list *head) {
+inline void singly_list_free(singly_linked_list *head) {
     // Recursive free next ( if head -> next is NULL, stopping recursive call )
     if (head->next != NULL) {
-        single_list_free(head->next);
+        singly_list_free(head->next);
     }
     free(head);
     printf("free:%p\n", head);
 }
 
 
-inline void single_list_insert(singly_linked_list *head, int index, singly_list_node *new_node) {
+inline void singly_list_insert(singly_linked_list *head, int index, singly_list_node *new_node) {
     if (index < 0) {
         printf("Index must be > 0.");
         return;
@@ -63,7 +63,7 @@ inline void single_list_insert(singly_linked_list *head, int index, singly_list_
     new_node->next = temp;
 }
 
-inline void single_list_reverse(singly_linked_list *head) {
+inline void singly_list_reverse(singly_linked_list *head) {
     if (head->next == NULL) {
         printf("Linked list must has one node at least");
         return;
@@ -93,12 +93,12 @@ static singly_list_node *do_reverse_rec(singly_linked_list *node) {
     return new_head;
 }
 
-void single_list_reverse_rec(singly_linked_list *head) {
+void singly_list_reverse_rec(singly_linked_list *head) {
     head->next = do_reverse_rec(head->next);
 }
 
 
-unsigned int single_list_get_length(singly_linked_list *head) {
+unsigned int singly_list_get_length(singly_linked_list *head) {
     unsigned int len = 0;
     while (head->next != NULL) {
         head = head->next;
@@ -108,8 +108,8 @@ unsigned int single_list_get_length(singly_linked_list *head) {
 }
 
 
-inline void single_list_delete(singly_linked_list *head, int index) {
-    if (index >= single_list_get_length(head)) {
+inline void singly_list_delete(singly_linked_list *head, int index) {
+    if (index >= singly_list_get_length(head)) {
         printf("Index is out of the linked list.\n");
         return;
     }

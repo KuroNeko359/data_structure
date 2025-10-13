@@ -8,7 +8,7 @@
 
 typedef struct singly_list_node {
     SINGLY_LIST_ELEM_TYPE data;
-    struct single_list_node *next;
+    struct singly_list_node *next;
 } singly_list_node, singly_linked_list;
 
 /**
@@ -23,7 +23,7 @@ singly_list_node *singly_list_create(SINGLY_LIST_ELEM_TYPE data);
  * @param data
  * @return
  */
-singly_list_node *singly_list_init();
+singly_linked_list *singly_list_init();
 
 /**
  * Get the last node of the node list.
