@@ -2,9 +2,12 @@
 // Created by 丁吉智 on 2025/9/19.
 //
 
-#ifndef CSAPP_LINKED_LIST_H
-#define CSAPP_LINKED_LIST_H
+#ifndef CSAPP_SINGLY_LINKED_LIST_H
+#define CSAPP_SINGLY_LINKED_LIST_H
 #define SINGLY_LIST_ELEM_TYPE int
+
+#include "types.h"
+
 
 typedef struct singly_list_node {
     SINGLY_LIST_ELEM_TYPE data;
@@ -84,5 +87,12 @@ inline unsigned int singly_list_get_length(singly_linked_list *head);
  * @param index     The position index of the node you want to delete.
  */
 inline void singly_list_delete(singly_linked_list *head, int index);
+
+/**
+ * Verify whether this linked list is empty.
+ * @param head The head of the linked list.
+ * @return If this linked list is empty, return true.
+ */
+bool singly_linked_list_is_empty(singly_linked_list *head);
 
 #endif //CSAPP_LINKED_LIST_H
