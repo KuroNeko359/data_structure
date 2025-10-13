@@ -1,7 +1,7 @@
 //
 // Created by KuroNeko359 on 2025/9/21.
 //
-#include "../../../include/linearlist/linkedlist/doubly_linked_list.h"
+#include "linearlist/linkedlist/doubly_linked_list.h"
 #include <stdio.h>
 
 
@@ -21,15 +21,15 @@ doubly_list_node *doubly_list_get_tail(doubly_linked_list *head) {
     return head;
 }
 
-//
-void doubly_list_append(doubly_linked_list *head_node,DOUBLY_LIST_ELEM_TYPE data) {
+void doubly_list_append(doubly_linked_list *head_node,
+    DOUBLY_LIST_ELEM_TYPE data) {
     doubly_list_node *last_node = doubly_list_get_tail(head_node);
-    doubly_list_node * new_node = doubly_list_create(data);
+    doubly_list_node * new_node = doubly_list_create_node(data);
     last_node->next = new_node;
     new_node->prev = last_node;
 }
 
-doubly_list_node *doubly_list_create(DOUBLY_LIST_ELEM_TYPE data) {
+doubly_list_node *doubly_list_create_node(DOUBLY_LIST_ELEM_TYPE data) {
     doubly_list_node *new_node;
     new_node->data = data;
     new_node->next = NULL;
@@ -37,9 +37,9 @@ doubly_list_node *doubly_list_create(DOUBLY_LIST_ELEM_TYPE data) {
     return new_node;
 }
 
-doubly_list_node *doubly_list_init(DOUBLY_LIST_ELEM_TYPE data) {
-    doubly_list_node * head;
-    head->next = doubly_list_create(data);
+doubly_list_node *doubly_list_init() {
+    doubly_list_node * head = doubly_list_create_node(0);
+    head->next = NULL;
     head->prev = NULL;
     head->data = 0;
     return head;
