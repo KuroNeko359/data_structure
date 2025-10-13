@@ -8,14 +8,15 @@ include_directories(include)
 set(
         PROJECT_SOURCES
         src/test.c
-        src/linearlist/singly_linked_list.c
-        src/linearlist/doubly_linked_list.c
+        src/linearlist/linkedlist/singly_linked_list.c
+        src/linearlist/linkedlist/doubly_linked_list.c
         src/linearlist/array.c
         src/linearlist/seq_list.c
         include/log.h
         include/linearlist/array.h
         include/linearlist/seq_list.h
         include/types.h
+        include/linearlist/linkedlist/static_linked_list.h
 
 )
 
