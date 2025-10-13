@@ -1,0 +1,8 @@
+//
+// Created by KuroNeko359 on 2025/10/13.
+//
+
+#ifndef CSAPP_CIRCULAR_LINKED_LIST_H
+#define CSAPP_CIRCULAR_LINKED_LIST_H
+
+#endif //CSAPP_CIRCULAR_LINKED_LIST_H
