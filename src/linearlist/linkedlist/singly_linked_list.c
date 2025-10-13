@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "../../../include/linearlist/linkedlist/singly_linked_list.h"
+#include "linearlist/linkedlist/singly_linked_list.h"
 
 singly_list_node *singly_list_create(SINGLY_LIST_ELEM_TYPE data) {
-    singly_list_node *temp = (singly_list_node *) malloc(sizeof(singly_list_node));
+    singly_list_node *temp = malloc(sizeof(singly_list_node));
     temp->data = data;
     temp->next = NULL;
     return temp;
@@ -21,7 +21,8 @@ inline singly_list_node *singly_list_get_tail(singly_linked_list *head) {
     return head;
 }
 
-inline singly_list_node *singly_list_append(singly_linked_list *head, SINGLY_LIST_ELEM_TYPE data) {
+inline singly_list_node *singly_list_append(singly_linked_list *head,
+                                            SINGLY_LIST_ELEM_TYPE data) {
     singly_list_node *new_node = singly_list_create(data);
     singly_list_node *last_node = singly_list_get_tail(head);
     last_node->next = new_node;
@@ -50,7 +51,8 @@ inline void singly_list_free(singly_linked_list *head) {
 }
 
 
-inline void singly_list_insert(singly_linked_list *head, int index, singly_list_node *new_node) {
+inline void singly_list_insert(singly_linked_list *head,
+                               int index, singly_list_node *new_node) {
     if (index < 0) {
         printf("Index must be > 0.");
         return;
@@ -79,12 +81,12 @@ inline void singly_list_reverse(singly_linked_list *head) {
     }
     current_node->next = prev_node;
 
-    head->next =current_node;
+    head->next = current_node;
 }
 
 
 static singly_list_node *do_reverse_rec(singly_linked_list *node) {
-    if (node == NULL||node->next == NULL) {
+    if (node == NULL || node->next == NULL) {
         return node;
     }
     singly_list_node *new_head = do_reverse_rec(node->next);
@@ -123,4 +125,9 @@ inline void singly_list_delete(singly_linked_list *head, int index) {
 
     free(temp);
     temp = NULL; // Avoid wild pointer.
+}
+
+
+bool singly_linked_list_is_empty(singly_linked_list *head) {
+    return (bool) (head->next == NULL);
 }
