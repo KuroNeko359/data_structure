@@ -5,7 +5,9 @@
 #ifndef CSAPP_TYPES_H
 #define CSAPP_TYPES_H
 
+#ifndef bool
 typedef _Bool bool;
+#endif
 
 
 #ifndef true
