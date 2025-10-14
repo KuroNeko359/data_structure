@@ -18,6 +18,7 @@ set(
         src/linearlist/array.c
         src/linearlist/seq_list.c
         src/linearlist/static_stack.c
+        src/linearlist/dynamic_stack.c
 )
 
 add_executable(csapp main.c
