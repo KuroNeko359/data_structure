@@ -40,5 +40,9 @@ DYNAMIC_STATCH_ELEM_TYPE dynamic_stack_pop(dynamic_stack *stack) {
 }
 
 DYNAMIC_STATCH_ELEM_TYPE dynamic_stack_get_top(dynamic_stack *stack) {
+    if (dynamic_stack_is_empty(stack)) {
+        ERROR_PRINT("Stack is empty");
+        exit(-1);
+    }
     return (stack->top)->data;
 }

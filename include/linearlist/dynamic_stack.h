@@ -7,8 +7,6 @@
 #define DYNAMIC_STATCH_ELEM_TYPE int
 #include <stdbool.h>
 
-#include "types.h"
-
 typedef struct dynamic_list_node {
     struct dynamic_list_node *next;
     DYNAMIC_STATCH_ELEM_TYPE data;
