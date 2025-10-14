@@ -11,6 +11,7 @@ set(
         src/linearlist/linkedlist/doubly_linked_list.c
         src/linearlist/linkedlist/circular_linked_list.c
         src/linearlist/linkedlist/static_linked_list.c
+        include/linearlist/linkedlist/list_head.h
 )
 
 set(
@@ -24,4 +25,6 @@ set(
 add_executable(csapp main.c
         ${LINEAR_LIST_SOURCES}
         ${LINKED_LIST_SOURCES}
+        src/example/bracket_match.c
+        include/example/bracket_match.h
 )
