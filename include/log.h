@@ -8,17 +8,23 @@
 #define ENABLE_DEBUG 1
 #endif
 
-#define DEBUG_PRINT(fmt, ...) do { \
+#include <time.h>
+#include <stdio.h>
+
+#define _LOG_BASE(level, stream, color_prefix, color_suffix, fmt, ...) do { \
 time_t now = time(NULL); \
 struct tm *t = localtime(&now); \
 char time_str[20]; \
 strftime(time_str, sizeof(time_str), "%H:%M:%S", t); \
-printf("[%s] %s:%d %s() " fmt "\n", \
+fprintf(stream, color_prefix"[%s] ["level"] %s:%d %s() "fmt color_suffix"\n", \
 time_str, __FILE__, __LINE__, __func__, ##__VA_ARGS__); \
 } while(0)
 
-// void debug_printf(const char* fmt, ...);
+#define _NO_COLOR ""
 
-void log_printf(const char *fmt, ...);
+#define DEBUG_PRINT(fmt, ...) _LOG_BASE("DEBUG", stdout, _NO_COLOR, _NO_COLOR, fmt, ##__VA_ARGS__)
+#define ERROR_PRINT(fmt, ...) _LOG_BASE("ERROR", stderr, _NO_COLOR, _NO_COLOR, fmt, ##__VA_ARGS__)
+#define WARN_PRINT(fmt, ...)  _LOG_BASE("WARN",  stderr, "\033[33m", "\033[0m", fmt, ##__VA_ARGS__)
+
 
 #endif //CSAPP_DEBUG_H
