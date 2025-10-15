@@ -51,45 +51,6 @@ void test_reverse_string_using_stack() {
     printf("%s\n", str2);
 }
 
-#include "example/bracket_match.h"
-
-bool bracket_match(char *str1) {
-    dynamic_stack *stack = dynamic_stack_init();
-    for (int i1 = 0; i1 < strlen(str1); i1++) {
-        enum bracket recent_bracket = parse_char(str1[i1]);
-        if (recent_bracket == 6) continue;
-        if (recent_bracket < 3) {
-            dynamic_stack_push(stack, recent_bracket);
-        } else if (recent_bracket >= 3 && recent_bracket < 6) {
-            if (dynamic_stack_is_empty(stack)) {
-                return false;
-            }
-            if (bracket_is_match(dynamic_stack_get_top(stack),
-                                 recent_bracket)) {
-                dynamic_stack_pop(stack);
-            }
-        }
-    }
-    return dynamic_stack_is_empty(stack);
-}
-
-void test_bracket_match() {
-    char *str1 = "(1+2)+3)";
-    char *str2 = "(){}[]";
-    char *str3 = "[{(]})";
-    if (bracket_match(str1)) {
-        printf("bracket_matched 1\n");
-    }
-    if (bracket_match(str2)) {
-        printf("bracket_matched 2\n");
-    }
-    if (bracket_match(str3)) {
-        printf("bracket_matched 3\n");
-    }
-}
-
-
 int main(int argc, char *argv[]) {
-    test_bracket_match();
     return 0;
 }
