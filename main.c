@@ -51,6 +51,36 @@ void test_reverse_string_using_stack() {
     printf("%s\n", str2);
 }
 
+#include "linearlist/static_queue.h"
+
+void test_print(static_queue *queue) {
+    for (int i = 0; i < STATIC_QUEUE_SIZE; i++) {
+        printf("%d ", queue->data[i]);
+    }
+    printf("\n");
+}
+
+void test_static_queue() {
+    static_queue *queue = static_queue_init();
+    static_queue_push(queue, 1);
+    static_queue_push(queue, 2);
+    static_queue_push(queue, 3);
+    test_print(queue);
+    static_queue_pop(queue);
+    test_print(queue);
+    static_queue_push(queue, 4);
+    test_print(queue);
+    static_queue_pop(queue);
+    test_print(queue);
+    static_queue_push(queue, 5);
+    test_print(queue);
+    static_queue_push(queue, 1);
+    test_print(queue);
+    static_queue_pop(queue);
+    test_print(queue);
+}
+
 int main(int argc, char *argv[]) {
+    test_static_queue();
     return 0;
 }

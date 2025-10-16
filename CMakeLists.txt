@@ -20,11 +20,11 @@ set(
         src/linearlist/seq_list.c
         src/linearlist/static_stack.c
         src/linearlist/dynamic_stack.c
+        include/linearlist/static_queue.h
+        src/linearlist/static_queue.c
 )
 
 add_executable(csapp main.c
         ${LINEAR_LIST_SOURCES}
         ${LINKED_LIST_SOURCES}
-        src/example/bracket_match.c
-        include/example/bracket_match.h
 )
