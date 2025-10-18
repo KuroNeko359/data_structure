@@ -47,5 +47,6 @@ QUEUE_ELEM_TYPE queue_pop(queue *queue) {
     QUEUE_ELEM_TYPE head_data = head->data;
     queue->head->next = head->next;
     free(head);
+    queue->len--;
     return head_data;
 }
