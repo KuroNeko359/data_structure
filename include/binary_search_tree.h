@@ -30,4 +30,6 @@ void bst_print_inorder_rec(bst_root *root);
 
 void bst_print_postorder_rec(bst_root *root);
 
+void bst_print_level_order(bst_root *root);
+
 #endif //CSAPP_BINARY_SEARCH_TREE_H

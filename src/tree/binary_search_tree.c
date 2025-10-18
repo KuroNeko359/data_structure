@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 int max(int num1, int num2) {
     return (num1 >= num2) ? num1 : num2;
 }
@@ -86,7 +87,7 @@ void bst_print_preorder_rec(bst_root *root) {
 void bst_print_inorder_rec(bst_root *root) {
     if (root == NULL) return;
     bst_print_inorder_rec(root->left);
-    printf("%d\n",root->data);
+    printf("%d\n", root->data);
     bst_print_inorder_rec(root->right);
 }
 
@@ -95,5 +96,93 @@ void bst_print_postorder_rec(bst_root *root) {
     if (root == NULL) return;
     bst_print_postorder_rec(root->left);
     bst_print_postorder_rec(root->right);
-    printf("%d\n",root->data);
+    printf("%d\n", root->data);
+}
+
+typedef struct node {
+    bst_node *data;
+    struct node *next;
+} node;
+
+typedef struct queue {
+    node *front;
+    node *rear;
+} queue;
+
+
+queue *init_queue() {
+    queue *q = (queue *) malloc(sizeof(queue));
+    q->front = NULL;
+    q->rear = NULL;
+    return q;
+}
+
+int is_empty(queue *q) {
+    return (q->front == NULL);
+}
+
+void enqueue(queue *q, bst_node *data) {
+    node *new_node = (node *) malloc(sizeof(node));
+    new_node->data = data;
+    new_node->next = NULL;
+
+    if (is_empty(q)) {
+        q->front = new_node;
+        q->rear = new_node;
+    } else {
+        q->rear->next = new_node;
+        q->rear = new_node;
+    }
+}
+
+bst_node *dequeue(queue *q) {
+    if (is_empty(q)) {
+        printf("Queue is empty.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    node *temp = q->front;
+    bst_node *data = temp->data;
+
+    q->front = q->front->next;
+
+    if (q->front == NULL) {
+        q->rear = NULL;
+    }
+
+    free(temp);
+    return data;
+}
+
+
+bst_node *get_front(queue *q) {
+    if (is_empty(q)) {
+        printf("Queue is empty.\n");
+        exit(EXIT_FAILURE);
+    }
+    return q->front->data;
+}
+
+void destroy_queue(queue *q) {
+    while (!is_empty(q)) {
+        dequeue(q);
+    }
+    free(q);
+}
+
+
+void bst_print_level_order(bst_root *root) {
+    if (root == NULL) return;
+    queue *queue = init_queue();
+    enqueue(queue,root);
+
+    while (!is_empty(queue)) {
+        bst_node *current = get_front(queue);
+        if (current->left != NULL) enqueue(queue, current->left);
+        if (current->right != NULL) enqueue(queue, current->right);
+        bst_node *node = dequeue(queue);
+        printf("%d\n",node->data);
+    }
+
+    destroy_queue(queue);
 }

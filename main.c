@@ -118,11 +118,11 @@ void test_queue() {
 void test_binary_search_tree() {
     srand((unsigned int)time(NULL));
 
-    // bst_root *root = bst_init(100 + rand() % 1000);
-    // for (int i = 0; i < 10; i++) {
-    //     int num1 = 100 + rand() % 1000;
-    //     bst_insert_rec(root,num1);
-    // }
+    bst_root *root = bst_init(100 + rand() % 1000);
+    for (int i = 0; i < 10; i++) {
+        int num1 = 100 + rand() % 1000;
+        bst_insert_rec(root,num1);
+    }
 
     bst_root *root1 = bst_init(10);
     int arr[14] = {5,15,3,7,13,17,1,4,6,8,11,12,16,18};
@@ -130,18 +130,19 @@ void test_binary_search_tree() {
         printf("insert %d\n",arr[i]);
         bst_insert_rec(root1,arr[i]);
     }
-    // if (bst_search_rec(root,134)) {
-    //     printf("Found\n");
-    // }else {
-    //     printf("Not found\n");
-    // }
+    if (bst_search_rec(root,134)) {
+        printf("Found\n");
+    }else {
+        printf("Not found\n");
+    }
 
-    // printf("max:%d\n",bst_get_max(root));
-    // printf("min:%d\n",bst_get_min(root));
-    // int height = bst_get_height_rec(root);
-    // printf("length：%d\n", height);
-    // printf("root:%d\n",root1->data);
+    printf("max:%d\n",bst_get_max(root));
+    printf("min:%d\n",bst_get_min(root));
+    int height = bst_get_height_rec(root);
+    printf("length：%d\n", height);
     bst_print_inorder_rec(root1);
+
+    bst_print_level_order(root1);
 }
 
 int main(int argc, char *argv[]) {
