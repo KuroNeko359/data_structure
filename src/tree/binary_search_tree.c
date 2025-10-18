@@ -110,18 +110,18 @@ typedef struct queue {
 } queue;
 
 
-queue *init_queue() {
+static queue *init_queue() {
     queue *q = (queue *) malloc(sizeof(queue));
     q->front = NULL;
     q->rear = NULL;
     return q;
 }
 
-int is_empty(queue *q) {
+static int is_empty(queue *q) {
     return (q->front == NULL);
 }
 
-void enqueue(queue *q, bst_node *data) {
+static void enqueue(queue *q, bst_node *data) {
     node *new_node = (node *) malloc(sizeof(node));
     new_node->data = data;
     new_node->next = NULL;
@@ -135,7 +135,7 @@ void enqueue(queue *q, bst_node *data) {
     }
 }
 
-bst_node *dequeue(queue *q) {
+static bst_node *dequeue(queue *q) {
     if (is_empty(q)) {
         printf("Queue is empty.\n");
         exit(EXIT_FAILURE);
@@ -155,7 +155,7 @@ bst_node *dequeue(queue *q) {
 }
 
 
-bst_node *get_front(queue *q) {
+static bst_node *get_front(queue *q) {
     if (is_empty(q)) {
         printf("Queue is empty.\n");
         exit(EXIT_FAILURE);
@@ -163,7 +163,7 @@ bst_node *get_front(queue *q) {
     return q->front->data;
 }
 
-void destroy_queue(queue *q) {
+static void destroy_queue(queue *q) {
     while (!is_empty(q)) {
         dequeue(q);
     }
@@ -186,3 +186,25 @@ void bst_print_level_order(bst_root *root) {
 
     destroy_queue(queue);
 }
+
+static bool is_bst_rec(bst_node *node,int *prev) {
+    if (node == NULL) return true;
+    if (!is_bst_rec(node->left,prev)) {
+        return false;
+    }
+
+    if (*prev < node->data) {
+        return true;
+    }
+    *prev = node->data;
+
+    if (!is_bst_rec(node->right,prev)) {
+        return false;
+    }
+}
+
+bool is_bst(bst_root *root) {
+    int prev = INT32_MIN;
+    return is_bst_rec(root,&prev);
+}
+

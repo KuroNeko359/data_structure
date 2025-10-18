@@ -143,6 +143,12 @@ void test_binary_search_tree() {
     bst_print_inorder_rec(root1);
 
     bst_print_level_order(root1);
+
+    if (is_bst(root1)) {
+        printf("is bst");
+    }else {
+        printf("not bst");
+    }
 }
 
 int main(int argc, char *argv[]) {
