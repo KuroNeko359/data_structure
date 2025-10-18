@@ -22,9 +22,19 @@ set(
         src/linearlist/dynamic_stack.c
         include/linearlist/static_queue.h
         src/linearlist/static_queue.c
+        include/linearlist/queue.h
+        src/linearlist/queue.c
+)
+
+set(
+        TREE_SOURCES
+        src/tree/binary_tree.c
+        src/tree/binary_search_tree.c
+        include/binary_search_tree.h
 )
 
 add_executable(csapp main.c
         ${LINEAR_LIST_SOURCES}
         ${LINKED_LIST_SOURCES}
+        ${TREE_SOURCES}
 )
