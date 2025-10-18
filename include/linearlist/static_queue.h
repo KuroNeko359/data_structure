@@ -24,5 +24,9 @@ STATIC_QUEUE_ELEM_TYPE static_queue_pop(static_queue *queue);
 
 STATIC_QUEUE_ELEM_TYPE static_queue_get(static_queue *queue);
 
+bool static_queue_is_empty(static_queue *queue);
+
+int static_queue_get_length(static_queue *queue);
+
 
 #endif //CSAPP_STATIC_QUEUE_H
