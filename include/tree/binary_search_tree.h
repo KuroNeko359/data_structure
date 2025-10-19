@@ -18,9 +18,9 @@ bst_node *bst_insert_rec(bst_node *current_node,BST_ELEM_TYPE data);
 
 bool bst_search_rec(bst_node *current_node,BST_ELEM_TYPE data);
 
-BST_ELEM_TYPE bst_get_max(bst_node *root);
+bst_node *bst_get_max_node(bst_root *root);
 
-BST_ELEM_TYPE bst_get_min(bst_node *root);
+bst_node *bst_get_min_node(bst_root *root);
 
 int bst_get_height_rec(bst_node *node);
 
@@ -34,7 +34,6 @@ void bst_print_level_order(bst_root *root);
 
 bool is_bst(bst_root *root);
 
-bst_node *bst_find_parent_node(bst_root *root,
-                               BST_ELEM_TYPE target_data);
+bst_node *bst_delete_node(bst_root *root, BST_ELEM_TYPE target_data);
 
 #endif //DATA_STRUCTURE_BINARY_SEARCH_TREE_H

@@ -47,24 +47,22 @@ bool bst_search_rec(bst_node *current_node,BST_ELEM_TYPE data) {
         return bst_search_rec(current_node->left, data);
 }
 
-BST_ELEM_TYPE bst_get_max(bst_root *root) {
-    if (root == NULL) return 0;
-    int max = root->data;
-    while (root->right != NULL) {
-        root = root->right;
-        max = root->data;
+bst_node *bst_get_max_node(bst_root *root) {
+    if (root == NULL) return NULL;
+    bst_node *max = root;
+    while (max->right != NULL) {
+        max = max->right;
     }
     return max;
 }
 
-BST_ELEM_TYPE bst_get_min(bst_root *root) {
-    if (root == NULL) return 0;
-    int max = root->data;
-    while (root->left != NULL) {
-        root = root->left;
-        max = root->data;
+bst_node *bst_get_min_node(bst_root *root) {
+    if (root == NULL) return NULL;
+    bst_node *min = root;
+    while (min->right != NULL) {
+        min = min->right;
     }
-    return max;
+    return min;
 }
 
 int bst_get_height_rec(bst_root *node) {
@@ -211,39 +209,43 @@ static bool has_left_child(bst_node *node) {
     return node->left != NULL;
 }
 
-bst_node *bst_find_parent_node(bst_root *root,
-                               BST_ELEM_TYPE target_data) {
-    if (root->data == target_data) {
-        printf("Have not parent node.");
-        return root;
-    }
-    if (root->right->data == target_data || root->left->data == target_data) {
-        return root;
-    }
-    if (root->data > target_data) {
-        bst_find_parent_node(root->left, target_data);
-    } else if (root->data < target_data) {
-        bst_find_parent_node(root->right, target_data);
-    }
-}
 
-bool bst_delete_node(bst_root *root, BST_ELEM_TYPE target_data) {
-    if (root->data > target_data) {
-        bst_search_rec(root->left, target_data);
-    } else if (root->data < target_data) {
-        bst_search_rec(root->right, target_data);
-    } else if (root->data == target_data) {
+bst_node *bst_delete_node(bst_root *root, BST_ELEM_TYPE target_data) {
+    if (root == NULL) return root;
+    if (target_data < root->data) {
+        root->left = bst_delete_node(root->left, target_data);
+    } else if (target_data > root->data) {
+        root->right = bst_delete_node(root->right, target_data);
+    } else if (target_data == root->data) {
+        // case 1 no child
+        if (root->left == NULL && root->right == NULL) {
+            free(root);
+            root = NULL;
+        }
+        // case 2 one child
+        else if (root->left == NULL) {
+            bst_node *temp = root;
+            root = root->right;
+            free(temp);
+        }
+
+        else if (root->right == NULL) {
+            bst_node *temp = root;
+            root = root->left;
+            free(temp);
+        }
+
+        //case 3 two child
+
+        else if (root->right != NULL && root->left != NULL) {
+            bst_node *temp = bst_get_min_node(root->right);
+            root->data = temp->data;
+            root->right = bst_delete_node(root->right,temp->data);
+        }
+
+        return root;
+
     }
-    if (root->right == NULL && root->left == NULL) {
-        //Delete this node(name:root)
-    }
-    if (root->right != NULL && root->left != NULL) {
-        // Fine min node of left subtree
-        // Replace value of this node with min node of left subtree
-        // Free the min node
-    }
-    if (root->left != NULL) bst_delete_node(root->left, target_data);
-    if (root->right != NULL) bst_delete_node(root->right, target_data);
 }
 
 bool is_bst(bst_root *root) {
