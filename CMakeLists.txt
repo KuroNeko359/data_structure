@@ -33,8 +33,8 @@ set(
         include/tree/binary_search_tree.h
         include/tree/avl_tree.h
         src/tree/avl_tree.c
-        include/tree/red_black_tree.h
-        src/tree/red_black_tree.c
+        include/tree/rbtree.h
+        src/tree/rbtree.c
 )
 
 add_executable(data_structure main.c

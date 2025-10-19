@@ -154,6 +154,14 @@ void test_binary_search_tree() {
 }
 
 int main(int argc, char *argv[]) {
-    test_binary_search_tree();
+    for (int i = 0; i < 10; i++) {
+        printf("%d",i);
+    }
+    printf("\n");
+    for (int i = 0; i < 10; ++i) {
+        printf("%d",i);
+    }
+
+    // test_binary_search_tree();
     return 0;
 }
