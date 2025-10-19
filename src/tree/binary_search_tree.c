@@ -59,8 +59,8 @@ bst_node *bst_get_max_node(bst_root *root) {
 bst_node *bst_get_min_node(bst_root *root) {
     if (root == NULL) return NULL;
     bst_node *min = root;
-    while (min->right != NULL) {
-        min = min->right;
+    while (min->left != NULL) {
+        min = min->left;
     }
     return min;
 }
@@ -227,9 +227,7 @@ bst_node *bst_delete_node(bst_root *root, BST_ELEM_TYPE target_data) {
             bst_node *temp = root;
             root = root->right;
             free(temp);
-        }
-
-        else if (root->right == NULL) {
+        } else if (root->right == NULL) {
             bst_node *temp = root;
             root = root->left;
             free(temp);
@@ -237,15 +235,13 @@ bst_node *bst_delete_node(bst_root *root, BST_ELEM_TYPE target_data) {
 
         //case 3 two child
 
-        else if (root->right != NULL && root->left != NULL) {
+        else {
             bst_node *temp = bst_get_min_node(root->right);
             root->data = temp->data;
-            root->right = bst_delete_node(root->right,temp->data);
+            root->right = bst_delete_node(root->right, temp->data);
         }
-
-        return root;
-
     }
+    return root;
 }
 
 bool is_bst(bst_root *root) {

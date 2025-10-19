@@ -125,7 +125,7 @@ void test_binary_search_tree() {
     }
 
     bst_root *root1 = bst_init(10);
-    int arr[14] = {5,15,3,7,13,17,1,4,6,8,11,12,16,18};
+    int arr[14] = {5,15,3,7,13,17,1,4,6,8,11,14,16,18};
     for (int i = 0; i < 14;i++) {
         printf("insert %d\n",arr[i]);
         bst_insert_rec(root1,arr[i]);
@@ -136,21 +136,21 @@ void test_binary_search_tree() {
         printf("Not found\n");
     }
 
-    printf("max:%d\n",bst_get_max(root));
-    printf("min:%d\n",bst_get_min(root));
     int height = bst_get_height_rec(root);
     printf("length：%d\n", height);
     bst_print_inorder_rec(root1);
 
     bst_print_level_order(root1);
 
+    printf("min : %d\n",bst_get_min_node(root1)->data);
+    printf("max : %d\n",bst_get_max_node(root1)->data);
+
+    bst_delete_node(root1,15);
     if (is_bst(root1)) {
         printf("is bst\n");
     }else {
         printf("not bst\n");
     }
-
-    printf("parent is %d\n",bst_find_parent_node(root1,1)->data);
 }
 
 int main(int argc, char *argv[]) {
