@@ -2,8 +2,8 @@
 // Created by KuroNeko359 on 2025/9/24.
 //
 
-#ifndef CSAPP_SEQ_LIST_H
-#define CSAPP_SEQ_LIST_H
+#ifndef DATA_STRUCTURE_SEQ_LIST_H
+#define DATA_STRUCTURE_SEQ_LIST_H
 
 #define seq_list_type int
 #define seq_list_size 10
@@ -45,4 +45,4 @@ seq_list_type seq_get_elem(seq_list *seq, int index);
  */
 void seq_list_destroy(seq_list *seq);
 
-#endif //CSAPP_SEQ_LIST_H
+#endif //DATA_STRUCTURE_SEQ_LIST_H

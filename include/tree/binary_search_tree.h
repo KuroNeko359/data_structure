@@ -2,15 +2,15 @@
 // Created by KuroNeko359 on 2025/10/17.
 //
 
-#ifndef CSAPP_BINARY_SEARCH_TREE_H
-#define CSAPP_BINARY_SEARCH_TREE_H
+#ifndef DATA_STRUCTURE_BINARY_SEARCH_TREE_H
+#define DATA_STRUCTURE_BINARY_SEARCH_TREE_H
 #define BST_ELEM_TYPE int
-#include "types.h"
+#include "../types.h"
 
 typedef struct bst_node {
-    struct bst_node *left,*right;
+    struct bst_node *left, *right;
     BST_ELEM_TYPE data;
-} bst_node,bst_root;
+} bst_node, bst_root;
 
 bst_root *bst_init(BST_ELEM_TYPE data);
 
@@ -34,4 +34,7 @@ void bst_print_level_order(bst_root *root);
 
 bool is_bst(bst_root *root);
 
-#endif //CSAPP_BINARY_SEARCH_TREE_H
+bst_node *bst_find_parent_node(bst_root *root,
+                               BST_ELEM_TYPE target_data);
+
+#endif //DATA_STRUCTURE_BINARY_SEARCH_TREE_H

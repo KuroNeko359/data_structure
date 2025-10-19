@@ -2,8 +2,8 @@
 // Created by KuroNeko359 on 2025/9/21.
 //
 
-#ifndef CSAPP_DOUBLY_LINKED_LIST_H
-#define CSAPP_DOUBLY_LINKED_LIST_H
+#ifndef DATA_STRUCTURE_DOUBLY_LINKED_LIST_H
+#define DATA_STRUCTURE_DOUBLY_LINKED_LIST_H
 
 #define DOUBLY_LIST_ELEM_TYPE int
 
@@ -56,4 +56,4 @@ doubly_list_node *doubly_list_get_tail(doubly_linked_list *head);
  */
 bool doubly_linked_list_is_empty(doubly_linked_list *head);
 
-#endif //CSAPP_DOUBLY_LINKED_LIST_H
+#endif //DATA_STRUCTURE_DOUBLY_LINKED_LIST_H

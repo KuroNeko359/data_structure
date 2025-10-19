@@ -1,7 +1,7 @@
 //
 // Created by KuroNeko359 on 2025/10/17.
 //
-#include "binary_search_tree.h"
+#include "../../include/tree/binary_search_tree.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -174,22 +174,22 @@ static void destroy_queue(queue *q) {
 void bst_print_level_order(bst_root *root) {
     if (root == NULL) return;
     queue *queue = init_queue();
-    enqueue(queue,root);
+    enqueue(queue, root);
 
     while (!is_empty(queue)) {
         bst_node *current = get_front(queue);
         if (current->left != NULL) enqueue(queue, current->left);
         if (current->right != NULL) enqueue(queue, current->right);
         bst_node *node = dequeue(queue);
-        printf("%d\n",node->data);
+        printf("%d\n", node->data);
     }
 
     destroy_queue(queue);
 }
 
-static bool is_bst_rec(bst_node *node,int *prev) {
+static bool is_bst_rec(bst_node *node, int *prev) {
     if (node == NULL) return true;
-    if (!is_bst_rec(node->left,prev)) {
+    if (!is_bst_rec(node->left, prev)) {
         return false;
     }
 
@@ -198,13 +198,55 @@ static bool is_bst_rec(bst_node *node,int *prev) {
     }
     *prev = node->data;
 
-    if (!is_bst_rec(node->right,prev)) {
+    if (!is_bst_rec(node->right, prev)) {
         return false;
     }
 }
 
-bool is_bst(bst_root *root) {
-    int prev = INT32_MIN;
-    return is_bst_rec(root,&prev);
+static bool has_right_child(bst_node *node) {
+    return node->right != NULL;
 }
 
+static bool has_left_child(bst_node *node) {
+    return node->left != NULL;
+}
+
+bst_node *bst_find_parent_node(bst_root *root,
+                               BST_ELEM_TYPE target_data) {
+    if (root->data == target_data) {
+        printf("Have not parent node.");
+        return root;
+    }
+    if (root->right->data == target_data || root->left->data == target_data) {
+        return root;
+    }
+    if (root->data > target_data) {
+        bst_find_parent_node(root->left, target_data);
+    } else if (root->data < target_data) {
+        bst_find_parent_node(root->right, target_data);
+    }
+}
+
+bool bst_delete_node(bst_root *root, BST_ELEM_TYPE target_data) {
+    if (root->data > target_data) {
+        bst_search_rec(root->left, target_data);
+    } else if (root->data < target_data) {
+        bst_search_rec(root->right, target_data);
+    } else if (root->data == target_data) {
+    }
+    if (root->right == NULL && root->left == NULL) {
+        //Delete this node(name:root)
+    }
+    if (root->right != NULL && root->left != NULL) {
+        // Fine min node of left subtree
+        // Replace value of this node with min node of left subtree
+        // Free the min node
+    }
+    if (root->left != NULL) bst_delete_node(root->left, target_data);
+    if (root->right != NULL) bst_delete_node(root->right, target_data);
+}
+
+bool is_bst(bst_root *root) {
+    int prev = INT32_MIN;
+    return is_bst_rec(root, &prev);
+}

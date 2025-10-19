@@ -1,8 +1,8 @@
 //
 // Created by KuroNeko359 on 2025/9/25.
 //
-#ifndef CSAPP_DEBUG_H
-#define CSAPP_DEBUG_H
+#ifndef DATA_STRUCTURE_DEBUG_H
+#define DATA_STRUCTURE_DEBUG_H
 
 #ifndef ENABLE_DEBUG
 #define ENABLE_DEBUG 1
@@ -27,4 +27,4 @@ time_str, __FILE__, __LINE__, __func__, ##__VA_ARGS__); \
 #define WARN_PRINT(fmt, ...)  _LOG_BASE("WARN",  stderr, "\033[33m", "\033[0m", fmt, ##__VA_ARGS__)
 
 
-#endif //CSAPP_DEBUG_H
+#endif //DATA_STRUCTURE_DEBUG_H

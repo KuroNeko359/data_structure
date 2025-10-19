@@ -2,8 +2,8 @@
 // Created by KuroNeko359 on 2025/10/13.
 //
 
-#ifndef CSAPP_STATIC_STACK_H
-#define CSAPP_STATIC_STACK_H
+#ifndef DATA_STRUCTURE_STATIC_STACK_H
+#define DATA_STRUCTURE_STATIC_STACK_H
 #define STATIC_STACK_ELEM_TYPE int
 #include "types.h"
 
@@ -25,4 +25,4 @@ bool static_stack_is_empty(static_stack *static_stack);
 
 
 
-#endif //CSAPP_STACK_H
+#endif //DATA_STRUCTURE_STACK_H

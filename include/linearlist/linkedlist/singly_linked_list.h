@@ -2,8 +2,8 @@
 // Created by 丁吉智 on 2025/9/19.
 //
 
-#ifndef CSAPP_SINGLY_LINKED_LIST_H
-#define CSAPP_SINGLY_LINKED_LIST_H
+#ifndef DATA_STRUCTURE_SINGLY_LINKED_LIST_H
+#define DATA_STRUCTURE_SINGLY_LINKED_LIST_H
 #define SINGLY_LIST_ELEM_TYPE int
 
 #include "types.h"
@@ -95,4 +95,4 @@ inline void singly_list_delete(singly_linked_list *head, int index);
  */
 bool singly_linked_list_is_empty(singly_linked_list *head);
 
-#endif //CSAPP_LINKED_LIST_H
+#endif //DATA_STRUCTURE_LINKED_LIST_H

@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "binary_search_tree.h"
+#include "include/tree/binary_search_tree.h"
 #include "include/linearlist/static_stack.h"
 
 #include "log.h"
@@ -145,10 +145,12 @@ void test_binary_search_tree() {
     bst_print_level_order(root1);
 
     if (is_bst(root1)) {
-        printf("is bst");
+        printf("is bst\n");
     }else {
-        printf("not bst");
+        printf("not bst\n");
     }
+
+    printf("parent is %d\n",bst_find_parent_node(root1,1)->data);
 }
 
 int main(int argc, char *argv[]) {

@@ -2,8 +2,8 @@
 // Created by KuroNeko359 on 2025/10/7.
 //
 
-#ifndef CSAPP_TYPES_H
-#define CSAPP_TYPES_H
+#ifndef DATA_STRUCTURE_TYPES_H
+#define DATA_STRUCTURE_TYPES_H
 
 #ifndef bool
 typedef _Bool bool;
@@ -20,4 +20,4 @@ typedef _Bool bool;
 
 
 
-#endif //CSAPP_TYPES_H
+#endif //DATA_STRUCTURE_TYPES_H

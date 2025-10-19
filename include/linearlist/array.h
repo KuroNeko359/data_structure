@@ -2,8 +2,8 @@
 // Created by KuroNeko359 on 2025/9/22.
 //
 
-#ifndef CSAPP_ARRAY_H
-#define CSAPP_ARRAY_H
+#ifndef DATA_STRUCTURE_ARRAY_H
+#define DATA_STRUCTURE_ARRAY_H
 
 typedef struct array {
     int *data;
@@ -15,4 +15,4 @@ array *array_init() {
 }
 
 
-#endif //CSAPP_ARRAY_H
+#endif //DATA_STRUCTURE_ARRAY_H

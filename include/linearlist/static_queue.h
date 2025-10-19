@@ -2,8 +2,8 @@
 // Created by KuroNeko359 on 2025/10/16.
 //
 
-#ifndef CSAPP_STATIC_QUEUE_H
-#define CSAPP_STATIC_QUEUE_H
+#ifndef DATA_STRUCTURE_STATIC_QUEUE_H
+#define DATA_STRUCTURE_STATIC_QUEUE_H
 
 #define STATIC_QUEUE_ELEM_TYPE int
 #define STATIC_QUEUE_SIZE 5
@@ -29,4 +29,4 @@ bool static_queue_is_empty(static_queue *queue);
 int static_queue_get_length(static_queue *queue);
 
 
-#endif //CSAPP_STATIC_QUEUE_H
+#endif //DATA_STRUCTURE_STATIC_QUEUE_H

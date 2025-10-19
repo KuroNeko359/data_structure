@@ -2,8 +2,8 @@
 // Created by KuroNeko359 on 2025/10/14.
 //
 
-#ifndef CSAPP_DYNAMIC_STACK_H
-#define CSAPP_DYNAMIC_STACK_H
+#ifndef DATA_STRUCTURE_DYNAMIC_STACK_H
+#define DATA_STRUCTURE_DYNAMIC_STACK_H
 #define DYNAMIC_STATCH_ELEM_TYPE int
 #include <stdbool.h>
 
@@ -27,4 +27,4 @@ DYNAMIC_STATCH_ELEM_TYPE dynamic_stack_pop(dynamic_stack *stack);
 
 DYNAMIC_STATCH_ELEM_TYPE dynamic_stack_get_top(dynamic_stack *stack);
 
-#endif //CSAPP_DYNAMIC_STACK_H
+#endif //DATA_STRUCTURE_DYNAMIC_STACK_H

@@ -2,9 +2,9 @@
 // Created by KuroNeko359 on 2025/10/17.
 //
 
-#ifndef CSAPP_QUEUE_H
+#ifndef DATA_STRUCTURE_QUEUE_H
 
-#define CSAPP_QUEUE_H
+#define DATA_STRUCTURE_QUEUE_H
 
 #define QUEUE_ELEM_TYPE int
 
@@ -30,4 +30,4 @@ bool queue_is_empty(queue *queue);
 QUEUE_ELEM_TYPE queue_pop(queue *queue);
 
 
-#endif //CSAPP_QUEUE_H
+#endif //DATA_STRUCTURE_QUEUE_H

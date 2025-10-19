@@ -1,0 +1,8 @@
+//
+// Created by KuroNeko359 on 2025/10/19.
+//
+
+#ifndef DATA_STRUCTURE_RED_BLACK_TREE_H
+#define DATA_STRUCTURE_RED_BLACK_TREE_H
+
+#endif //DATA_STRUCTURE_RED_BLACK_TREE_H

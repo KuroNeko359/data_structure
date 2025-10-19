@@ -2,7 +2,7 @@
 // Created by KuroNeko359 on 2025/10/17.
 //
 
-#include "binary_tree.h"
+#include "../../include/tree/binary_tree.h"
 
 #include <stdlib.h>
 

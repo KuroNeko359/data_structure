@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 4.0)
-project(csapp C)
+project(data_structure C)
 
 set(CMAKE_C_STANDARD 11)
 
@@ -30,10 +30,14 @@ set(
         TREE_SOURCES
         src/tree/binary_tree.c
         src/tree/binary_search_tree.c
-        include/binary_search_tree.h
+        include/tree/binary_search_tree.h
+        include/tree/avl_tree.h
+        src/tree/avl_tree.c
+        include/tree/red_black_tree.h
+        src/tree/red_black_tree.c
 )
 
-add_executable(csapp main.c
+add_executable(data_structure main.c
         ${LINEAR_LIST_SOURCES}
         ${LINKED_LIST_SOURCES}
         ${TREE_SOURCES}
