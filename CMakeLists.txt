@@ -41,4 +41,6 @@ add_executable(data_structure main.c
         ${LINEAR_LIST_SOURCES}
         ${LINKED_LIST_SOURCES}
         ${TREE_SOURCES}
+        include/tools/timer.h
+        src/tools/timer.c
 )

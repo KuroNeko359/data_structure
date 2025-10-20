@@ -5,7 +5,9 @@
 
 #include "log.h"
 #include "linearlist/dynamic_stack.h"
-
+#include "linearlist/linkedlist/singly_linked_list.h"
+#include "tree/avl_tree.h"
+#include "tools/timer.h"
 
 void test_static_stack() {
     static_stack *static_stack = static_stack_init(10);
@@ -68,7 +70,7 @@ void test_static_queue() {
     static_queue_push(queue, 2);
     static_queue_push(queue, 3);
     test__static_queue_print(queue);
-    printf("len:%d\n",static_queue_get_length(queue));
+    printf("len:%d\n", static_queue_get_length(queue));
     static_queue_pop(queue);
     test__static_queue_print(queue);
     static_queue_push(queue, 4);
@@ -79,17 +81,17 @@ void test_static_queue() {
     test__static_queue_print(queue);
     static_queue_push(queue, 1);
     test__static_queue_print(queue);
-    printf("len:%d\n",static_queue_get_length(queue));
+    printf("len:%d\n", static_queue_get_length(queue));
     static_queue_pop(queue);
     test__static_queue_print(queue);
     static_queue_pop(queue);
     test__static_queue_print(queue);
     static_queue_pop(queue);
     test__static_queue_print(queue);
-    printf("len:%d\n",static_queue_get_length(queue));
+    printf("len:%d\n", static_queue_get_length(queue));
     static_queue_pop(queue);
     test__static_queue_print(queue);
-    printf("len:%d\n",static_queue_get_length(queue));
+    printf("len:%d\n", static_queue_get_length(queue));
     if (static_queue_is_empty(queue)) {
         printf("Queue is empty.");
     }
@@ -99,40 +101,40 @@ void test_static_queue() {
 
 void test_queue_print(queue *queue) {
     while (!queue_is_empty(queue)) {
-        printf("%d ",queue_pop(queue));
+        printf("%d ", queue_pop(queue));
     }
     printf("\n");
 }
 
 void test_queue() {
-    queue * queue = queue_init();
-    queue_push(queue,1);
-    queue_push(queue,2);
-    queue_push(queue,3);
+    queue *queue = queue_init();
+    queue_push(queue, 1);
+    queue_push(queue, 2);
+    queue_push(queue, 3);
     queue_pop(queue);
-    queue_push(queue,4);
-    queue_push(queue,5);
+    queue_push(queue, 4);
+    queue_push(queue, 5);
     test_queue_print(queue);
 }
 
 void test_binary_search_tree() {
-    srand((unsigned int)time(NULL));
+    srand((unsigned int) time(NULL));
 
     bst_root *root = bst_init(100 + rand() % 1000);
     for (int i = 0; i < 10; i++) {
         int num1 = 100 + rand() % 1000;
-        bst_insert_rec(root,num1);
+        bst_insert_rec(root, num1);
     }
 
     bst_root *root1 = bst_init(10);
-    int arr[14] = {5,15,3,7,13,17,1,4,6,8,11,14,16,18};
-    for (int i = 0; i < 14;i++) {
-        printf("insert %d\n",arr[i]);
-        bst_insert_rec(root1,arr[i]);
+    int arr[14] = {5, 15, 3, 7, 13, 17, 1, 4, 6, 8, 11, 14, 16, 18};
+    for (int i = 0; i < 14; i++) {
+        printf("insert %d\n", arr[i]);
+        bst_insert_rec(root1, arr[i]);
     }
-    if (bst_search_rec(root,134)) {
+    if (bst_search_rec(root, 134)) {
         printf("Found\n");
-    }else {
+    } else {
         printf("Not found\n");
     }
 
@@ -142,26 +144,44 @@ void test_binary_search_tree() {
 
     bst_print_level_order(root1);
 
-    printf("min : %d\n",bst_get_min_node(root1)->data);
-    printf("max : %d\n",bst_get_max_node(root1)->data);
+    printf("min : %d\n", bst_get_min_node(root1)->data);
+    printf("max : %d\n", bst_get_max_node(root1)->data);
 
-    bst_delete_node(root1,15);
+    bst_delete_node(root1, 15);
     if (is_bst(root1)) {
         printf("is bst\n");
-    }else {
+    } else {
         printf("not bst\n");
     }
 }
 
-int main(int argc, char *argv[]) {
-    for (int i = 0; i < 10; i++) {
-        printf("%d",i);
+void test_avl_tree() {
+    avl_root *avl_root = avl_init(1);
+    clock_t t1 = timer_start();
+    // Insertion of avl tree
+    for (int i = 2; i < 10000000; i++) {
+        avl_root = avl_insert(avl_root, i);
     }
-    printf("\n");
-    for (int i = 0; i < 10; ++i) {
-        printf("%d",i);
-    }
+    double s1 = timer_end(t1);
+    printf("Insertion completed, takes %.4f s.\n",s1);
+    printf("tree height %d\n", avl_node_get_height(avl_root));
 
-    // test_binary_search_tree();
+    // test search
+    int counter = 0;
+    avl_node *found_node = avl_search(avl_root, 100234, &counter);
+    if (found_node != NULL)
+        printf("Found %d, counter: %d\n", found_node->data, counter);
+    // test delete
+    int counter2 = 0;
+    avl_root = avl_delete_node(avl_root, 4);
+    avl_node *found_node1 = avl_search(avl_root, 4, &counter2);
+    if (found_node1 != NULL)
+        printf("Found %d, counter: %d\n", found_node1->data, counter2);
+    else
+        printf("Not found.\n");
+}
+
+int main(int argc, char *argv[]) {
+    test_avl_tree();
     return 0;
 }
