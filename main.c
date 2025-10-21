@@ -180,8 +180,20 @@ void test_avl_tree() {
     else
         printf("Not found.\n");
 }
+#include "tree/rbtree.h"
+
+void test_rbtree() {
+    rbtree * tree = rbtree_init();
+    for (int i = 10; i < 100; i += 10) {
+        rbtree_insert_node(tree,i);
+    }
+    inorder_print(tree,tree->root);
+
+
+
+}
 
 int main(int argc, char *argv[]) {
-    test_avl_tree();
+    test_rbtree();
     return 0;
 }
