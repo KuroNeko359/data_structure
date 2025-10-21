@@ -5,7 +5,7 @@
 #ifndef DATA_STRUCTURE_RBTREE_H
 #define DATA_STRUCTURE_RBTREE_H
 
-typedef int rbtree_type;
+typedef int rbtree_key;
 
 typedef enum node_color {
     BLACK,
@@ -14,23 +14,30 @@ typedef enum node_color {
 
 typedef struct rbtree_node {
     struct rbtree_node *left, *right, *parent;
-    rbtree_type data;
+    rbtree_key key;
+    void *value;
     node_color color;
 } rbtree_node, rbtree_root;
 
-rbtree_node *rbtree_left_rotate(rbtree_node *node);
+typedef struct rbtree {
+    rbtree_node *root; // root node
+    rbtree_node *nil; // leaf node
+} rbtree;
 
-rbtree_node *rbtree_right_rotate(rbtree_node *node);
+rbtree_node *rbtree_left_rotate(rbtree *root, rbtree_node *node);
 
-rbtree_root *rbtree_init(rbtree_type *data);
+rbtree_node *rbtree_right_rotate(rbtree *root, rbtree_node *node);
 
-rbtree_node *rbtree_create_node(rbtree_type *data);
+rbtree *rbtree_init();
 
-rbtree_node *rbtree_delete_node(rbtree_node *root, rbtree_type target);
+rbtree_node *rbtree_create_node(rbtree *tree,rbtree_key key);
 
-rbtree_node *rbtree_insert_node(rbtree_node *root, rbtree_type data);
+rbtree_node *rbtree_delete_node(rbtree_node *root, rbtree_key target);
 
-rbtree_node *rbtree_search(rbtree_node *root, rbtree_type target, int *counter);
+void rbtree_insert_node(rbtree *tree, rbtree_key data);
 
+rbtree_node *rbtree_search(rbtree_node *root, rbtree_key target, int *counter);
+
+void inorder_print(rbtree *tree, rbtree_node *node);
 
 #endif //DATA_STRUCTURE_RBTREE_H
