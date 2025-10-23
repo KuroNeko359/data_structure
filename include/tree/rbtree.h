@@ -32,11 +32,11 @@ rbtree *rbtree_init();
 
 rbtree_node *rbtree_create_node(rbtree *tree,rbtree_key key);
 
-rbtree_node *rbtree_delete_node(rbtree_node *root, rbtree_key target);
+rbtree_node *rbtree_delete_node(rbtree *tree, rbtree_key target);
 
 void rbtree_insert_node(rbtree *tree, rbtree_key data);
 
-rbtree_node *rbtree_search(rbtree_node *root, rbtree_key target, int *counter);
+rbtree_node *rbtree_search(rbtree *tree, rbtree_key target, int *counter);
 
 void inorder_print(rbtree *tree, rbtree_node *node);
 

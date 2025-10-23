@@ -163,7 +163,7 @@ void test_avl_tree() {
         avl_root = avl_insert(avl_root, i);
     }
     double s1 = timer_end(t1);
-    printf("Insertion completed, takes %.4f s.\n",s1);
+    printf("Insertion completed, takes %.4f s.\n", s1);
     printf("tree height %d\n", avl_node_get_height(avl_root));
 
     // test search
@@ -180,17 +180,19 @@ void test_avl_tree() {
     else
         printf("Not found.\n");
 }
+
 #include "tree/rbtree.h"
 
 void test_rbtree() {
-    rbtree * tree = rbtree_init();
+    rbtree *tree = rbtree_init();
     for (int i = 10; i < 100; i += 10) {
-        rbtree_insert_node(tree,i);
+        rbtree_insert_node(tree, i);
     }
-    inorder_print(tree,tree->root);
-
-
-
+    int counter = 0;
+    rbtree_node *found = rbtree_search(tree, 80, &counter);
+    if (found != tree->nil)
+        printf("Found:%d Counter:%d", found->key, counter);
+    else printf("Not found");
 }
 
 int main(int argc, char *argv[]) {

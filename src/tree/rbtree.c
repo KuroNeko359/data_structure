@@ -69,7 +69,78 @@ rbtree_node *rbtree_create_node(rbtree *tree, rbtree_key key) {
     return new_node;
 }
 
-rbtree_node *rbtree_delete_node(rbtree_node *root, rbtree_key target);
+static rbtree_node *rbtree_get_min_node(rbtree *tree, rbtree_node *root) {
+    rbtree_node *nil = tree->nil;
+    while (root != nil) {
+        root = root->left;
+    }
+    return root;
+}
+
+static rbtree_node *get_successor_node(rbtree *tree, rbtree_node *root) {
+    rbtree_node *successor;
+    rbtree_node *nil = tree->nil;
+    if (root->right != nil) {
+        successor = rbtree_get_min_node(tree, root->right);
+    } else {
+        successor = nil;
+    }
+    return successor;
+}
+
+static rbtree_node *get_sibling_node(rbtree *tree, rbtree_node *root) {
+    rbtree_node *nil = tree->nil;
+    rbtree_node *parent = root->parent;
+    if (parent->left == root) {
+        return parent->right;
+    }
+    if (parent->right == root) {
+        return parent->left;
+    }
+    return nil;
+}
+
+static int get_unbalance_case(rbtree *tree, rbtree_node *root);
+
+// TODO Unfinished It is temporary put on hold due to ability issues.
+rbtree_node *rbtree_delete_node(rbtree *tree, rbtree_key target) {
+    rbtree_node *root = tree->root;
+    rbtree_node *nil = tree->nil;
+
+    // Locate node that will be deleted.
+    while (root != nil) {
+        if (root->key == target) {
+            break;
+        }
+        if (root->key < target) {
+            root = root->right;
+        } else if (root->key > target) {
+            root = root->left;
+        }
+    }
+
+
+    if (root->color == RED) {
+        // The color of node to delete is red.
+        if (root->left == nil && root->right == nil) {
+            root = nil;
+            return root;
+        }
+        if (root->left != nil || root->right != nil) {
+            // Two subtree.
+            // Find the successor of node, and replace this node with it.
+            rbtree_node *successor = get_successor_node(tree, root);
+            root->key = successor->key;
+            successor->parent->left = nil;
+            free(successor);
+        }
+    } else if (root->color == BLACK) {
+        // The color of node to delete is black.
+    }
+
+
+    return root;
+}
 
 void inorder_print(rbtree *tree, rbtree_node *node) {
     if (node == tree->nil) return;
@@ -90,7 +161,6 @@ static void rbtree_fix_imbalance_after_insertion(
                 // LXb
                 // case 3 LRb
                 // Convert to LLb
-                printf("// LXb");
                 if (new_node == parent->right) {
                     new_node = parent;
                     rbtree_left_rotate(tree, new_node);
@@ -101,7 +171,6 @@ static void rbtree_fix_imbalance_after_insertion(
                 rbtree_right_rotate(tree, grandparent);
             } else if (y_node->color == RED) {
                 // LXr
-                printf("// LXr");
                 y_node->color = BLACK;
                 parent->color = BLACK;
                 grandparent->color = RED;
@@ -112,7 +181,6 @@ static void rbtree_fix_imbalance_after_insertion(
             rbtree_node *y_node = grandparent->left;
             if (y_node->color == RED) {
                 // RXr
-                printf("// RXr");
                 y_node->color = BLACK;
                 parent->color = BLACK;
                 grandparent->color = RED;
@@ -121,7 +189,6 @@ static void rbtree_fix_imbalance_after_insertion(
                 // RXb
                 // case 3 RLb
                 // Convert to RRb
-                printf("// RXb");
                 if (new_node == parent->left) {
                     new_node = parent;
                     rbtree_right_rotate(tree, new_node);
@@ -136,7 +203,66 @@ static void rbtree_fix_imbalance_after_insertion(
     tree->root->color = BLACK;
 }
 
-static void rbtree_fix_imbalance_after_deletion();
+// TODO Unfinished It is temporary put on hold due to ability issues.
+static void rbtree_fix_imbalance_after_deletion(
+    rbtree *tree, rbtree_node *deleted_node) {
+    rbtree_node *nil = tree->nil;
+    rbtree_node *sibling = get_sibling_node(tree, deleted_node);
+    rbtree_node *parent = deleted_node->parent;
+    /**
+     * case 1 - node's sibling is black.
+     * And it has one or two red child or two black child.
+     * In this case, sibling node can't be nil.
+     */
+    if (sibling->color == BLACK) {
+        if (sibling->left == nil && sibling->right == nil) {
+            sibling->color = RED;
+        }
+        if (deleted_node->parent->left == sibling) {
+            // case LX
+            if (sibling->left == nil && sibling->right != nil &&
+                sibling->right->color == RED) {
+                // case LR
+                sibling->right->color = parent->color;
+                rbtree_left_rotate(tree, sibling);
+                rbtree_right_rotate(tree, parent);
+            } else if (sibling->left != nil &&
+                       sibling->left->color == RED) {
+                // case LL
+                sibling->left->color = sibling->color;
+                sibling->color = parent->color;
+                parent->color = BLACK;
+                rbtree_right_rotate(tree, parent);
+            } else if (sibling->left != nil &&
+                       sibling->right != nil &&
+                       sibling->left->color == BLACK &&
+                       sibling->right->color == BLACK) {
+            }
+        } else if (deleted_node->parent->right == sibling) {
+            // case RX
+            if (sibling->right == nil &&
+                sibling->left != nil &&
+                sibling->left->color == RED) {
+                // case RL
+                sibling->left->color = parent->color;
+                rbtree_right_rotate(tree, sibling);
+                rbtree_left_rotate(tree, parent);
+            } else if (sibling->right != nil &&
+                       sibling->right->color == RED) {
+                // case RR
+                sibling->right->color = sibling->color;
+                sibling->color = parent->color;
+                parent->color = BLACK;
+                rbtree_left_rotate(tree, parent);
+            } else if (sibling->left != nil &&
+                       sibling->right != nil &&
+                       sibling->left->color == BLACK &&
+                       sibling->right->color == BLACK) {
+            }
+        }
+    } else if (sibling->color == RED) {
+    }
+}
 
 void rbtree_insert_node(rbtree *tree, rbtree_key data) {
     rbtree_node *root = tree->root;
@@ -169,4 +295,18 @@ void rbtree_insert_node(rbtree *tree, rbtree_key data) {
     rbtree_fix_imbalance_after_insertion(tree, new_node);
 }
 
-rbtree_node *rbtree_search(rbtree_node *root, rbtree_key target, int *counter);
+rbtree_node *rbtree_search(rbtree *tree, rbtree_key target, int *counter) {
+    rbtree_node *root = tree->root;
+    rbtree_node *nil = tree->nil;
+    while (root != nil) {
+        (*counter)++;
+        if (root->key < target) {
+            root = root->right;
+        } else if (root->key > target) {
+            root = root->left;
+        } else if (root->key == target) {
+            return root;
+        }
+    }
+    return nil;
+}
